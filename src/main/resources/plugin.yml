@@ -1,0 +1,9 @@
+name: Azion-API
+version: 2.0.0
+author: Mathis_Bruel
+description: API of Azion MC
+main: fr.azion.mathis_bruel.api.API
+website: https://www.azion.fr/
+commands:
+  test:
+    description: Command of test the api
