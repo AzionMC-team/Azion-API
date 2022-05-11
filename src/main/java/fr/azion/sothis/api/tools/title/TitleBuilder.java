@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 public class TitleBuilder {
 
-    public void sendTitle(Player player, String title , ChatColor chatColorTitle, String subtitle, ChatColor chatColorSubTitle, TitleOptions options) {
+    public static void sendTitle(Player player, String title , ChatColor chatColorTitle, String subtitle, ChatColor chatColorSubTitle, TitleOptions options) {
         IChatBaseComponent chatTitle = IChatBaseComponent.ChatSerializer.a(
                 "{\"text\": \"" + title + "\",color:" + chatColorTitle.name().toLowerCase() + "}");
         IChatBaseComponent chatSubTitle = IChatBaseComponent.ChatSerializer.a(

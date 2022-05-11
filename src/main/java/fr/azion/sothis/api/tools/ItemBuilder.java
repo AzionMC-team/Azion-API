@@ -20,26 +20,6 @@ public class ItemBuilder {
         return itemStack;
     }
 
-    /*public FoxBuilder(Skull skull) {
-        itemStack = skull.getItemStack();
-    }
-
-    public FoxBuilder(Skull skull, int amount) {
-        itemStack = skull.getItemStack();
-        itemStack.setAmount(amount);
-    }
-
-    public FoxBuilder(Skull skull, short durability) {
-        itemStack = skull.getItemStack();
-        itemStack.setDurability(durability);
-    }
-
-    public FoxBuilder(Skull skull, int amount, short durability) {
-        itemStack = skull.getItemStack();
-        itemStack.setAmount(amount);
-        itemStack.setDurability(durability);
-    }*/
-
     public ItemBuilder(ItemBuilder itemBuilder) {
         itemStack = itemBuilder.toItemStack();
     }
