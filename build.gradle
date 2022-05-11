@@ -9,20 +9,28 @@ compileJava.options.encoding = 'UTF-8'
 repositories {
     mavenCentral()
     maven {
-        url {'https://hub.spigotmc.org/nexus/content/repositories/public/'}
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+        content {
+            includeGroup 'org.bukkit'
+            includeGroup 'org.spigotmc'
+        }
     }
+    maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
+    maven { url = 'https://oss.sonatype.org/content/repositories/central' }
+    mavenLocal()
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
     compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
+    compileOnly 'org.bukkit:craftbukkit:1.8.8-R0.1-SNAPSHOT'
+    implementation group: 'org.mongodb', name: 'mongo-java-driver', version: '3.12.11'
 }
 
 test {
     useJUnitPlatform()
 }
 jar{
-    //destinationDir = file("C:\\Users\\mathi\\Documents\\AzionCode\\AdminTools\\libs")
-    destinationDir = file("C:\\Users\\mathi\\Documents\\ServeurTest1.8\\plugins")
+    destinationDir = file("C:\\Users\\Shadow\\Download")
 }
