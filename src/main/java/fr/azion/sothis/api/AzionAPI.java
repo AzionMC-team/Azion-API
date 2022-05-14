@@ -1,11 +1,20 @@
 package fr.azion.sothis.api;
 
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoIterable;
 import fr.azion.sothis.api.database.DatabaseManager;
 import fr.azion.sothis.api.event.Join;
+import fr.azion.sothis.api.listeners.AzionListener;
+import fr.azion.sothis.api.listeners.ListenerManager;
 import fr.azion.sothis.api.managers.GradeManager;
+import fr.azion.sothis.api.managers.ObjectManager;
+import fr.azion.sothis.api.managers.ReportManager;
 import fr.azion.sothis.api.managers.UserManager;
+import fr.azion.sothis.api.pojo.User;
 import fr.azion.sothis.api.tools.title.TitleBuilder;
 import fr.azion.sothis.api.tools.title.TitleOptions;
+import jdk.internal.dynalink.MonomorphicCallSite;
+import org.bson.Document;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -19,8 +28,11 @@ public class AzionAPI {
     private static AzionAPI instance;
 
     private static DatabaseManager databaseManager;
+    private static ListenerManager listenerManager;
     private static UserManager userManager;
     private static GradeManager gradeManager;
+    private static ReportManager reportManager;
+    private static ObjectManager objectManager;
 
     /**
      * Start the API (and the database connection)
@@ -36,8 +48,11 @@ public class AzionAPI {
         databaseManager = new DatabaseManager();
         databaseManager.init();
 
+        listenerManager = new ListenerManager();
+
         userManager = new UserManager(databaseManager);
         gradeManager = new GradeManager(databaseManager);
+        reportManager = new ReportManager(databaseManager, listenerManager);
 
         registerEvent();
     }
@@ -57,6 +72,33 @@ public class AzionAPI {
         PluginManager pm = plugin.getServer().getPluginManager();
 
         pm.registerEvents(new Join(databaseManager, userManager), plugin);
+    }
+
+    public void registerEvent(AzionListener clazz) {
+        listenerManager.addListener(clazz);
+    }
+
+    public <T> MongoCollection<T> createCollection(String name, Class T) {
+        MongoIterable<String> listCol = databaseManager.getMongoDatabase().listCollectionNames();
+        int nmb = 0;
+        while (listCol.iterator().hasNext()) {
+            if(listCol.iterator().next().equals("name")) {
+                nmb++;
+            }
+        }
+        if(nmb == 0) {
+            databaseManager.getMongoDatabase().createCollection(name);
+        }
+        try {
+            MongoCollection<T> collection = databaseManager.getMongoDatabase().getCollection(name, T);
+            databaseManager.getCollections().put(name, collection);
+            return collection;
+        } catch (Exception e) {
+            plugin.getLogger().severe("The object are not valid or the collection doesn't exist");
+            e.printStackTrace();
+            plugin.getPluginLoader().disablePlugin(plugin);
+        }
+        return null;
     }
 
     /**
@@ -83,7 +125,15 @@ public class AzionAPI {
         return gradeManager;
     }
 
+    public ReportManager getReportManager() {
+        return reportManager;
+    }
+
     public void sendTitle(Player player, String title , ChatColor chatColorTitle, String subtitle, ChatColor chatColorSubTitle, TitleOptions options) {
         TitleBuilder.sendTitle(player,title,chatColorTitle,subtitle,chatColorSubTitle,options);
+    }
+
+    public DatabaseManager getDatabaseManager() {
+        return databaseManager;
     }
 }

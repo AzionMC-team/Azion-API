@@ -15,7 +15,6 @@ import static com.mongodb.client.model.Filters.eq;
 public class GradeManager {
 
     private MongoCollection<Grade> grades;
-    private List<Grade> gradeList;
 
     public GradeManager(DatabaseManager databaseManager) {
         this.grades = databaseManager.getGrades();

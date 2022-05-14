@@ -66,7 +66,7 @@ Update the object in the database:
 userManager.updateUser(user)
 ```
 
-And a short to fast update your object
+And a shortcut to fast update your object
 ```java
 userManager.updateUser(uuid, user -> {
     user.setName("Chocolat");    
