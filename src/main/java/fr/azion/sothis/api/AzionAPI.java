@@ -10,22 +10,27 @@ import fr.azion.sothis.api.managers.GradeManager;
 import fr.azion.sothis.api.managers.ObjectManager;
 import fr.azion.sothis.api.managers.ReportManager;
 import fr.azion.sothis.api.managers.UserManager;
-import fr.azion.sothis.api.pojo.User;
+import fr.azion.sothis.api.socket.Sockets;
 import fr.azion.sothis.api.tools.title.TitleBuilder;
 import fr.azion.sothis.api.tools.title.TitleOptions;
-import jdk.internal.dynalink.MonomorphicCallSite;
-import org.bson.Document;
+import net.milkbowl.vault.chat.Chat;
+import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.permission.Permission;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.RegisteredServiceProvider;
+
+import java.util.logging.Logger;
 
 public class AzionAPI {
 
     private static Plugin plugin;
-    private static String instanceName;
+    private static Logger logger;
 
     private static AzionAPI instance;
+    private static Sockets sockets;
 
     private static DatabaseManager databaseManager;
     private static ListenerManager listenerManager;
@@ -33,6 +38,10 @@ public class AzionAPI {
     private static GradeManager gradeManager;
     private static ReportManager reportManager;
     private static ObjectManager objectManager;
+
+    private static Economy econ = null;
+    private static Permission perms = null;
+    private static Chat chat = null;
 
     /**
      * Start the API (and the database connection)
@@ -43,18 +52,30 @@ public class AzionAPI {
      */
     public static void start(Plugin plug, String name) {
         plugin = plug;
-        instanceName = name;
+        logger = plug.getLogger();
 
         databaseManager = new DatabaseManager();
         databaseManager.init();
 
         listenerManager = new ListenerManager();
+        startVault();
 
-        userManager = new UserManager(databaseManager);
+        userManager = new UserManager(databaseManager, econ);
         gradeManager = new GradeManager(databaseManager);
-        reportManager = new ReportManager(databaseManager, listenerManager);
+        sockets = new Sockets(listenerManager);
+        reportManager = new ReportManager(databaseManager, listenerManager, sockets);
 
         registerEvent();
+    }
+
+    private static void startVault() {
+        if (!setupEconomy() ) {
+            logger.severe(String.format("[%s] - Disabled due to no Vault dependency found!", plugin.getDescription().getName()));
+            plugin.getServer().getPluginManager().disablePlugin(plugin);
+            return;
+        }
+        setupPermissions();
+        setupChat();
     }
 
     /**
@@ -63,6 +84,7 @@ public class AzionAPI {
      */
     public static void stop() {
         databaseManager.close();
+        logger.info(String.format("[%s] Disabled Version %s", plugin.getDescription().getName(), plugin.getDescription().getVersion()));
     }
 
     /**
@@ -94,7 +116,7 @@ public class AzionAPI {
             databaseManager.getCollections().put(name, collection);
             return collection;
         } catch (Exception e) {
-            plugin.getLogger().severe("The object are not valid or the collection doesn't exist");
+            logger.severe("The object are not valid or the collection doesn't exist");
             e.printStackTrace();
             plugin.getPluginLoader().disablePlugin(plugin);
         }
@@ -135,5 +157,33 @@ public class AzionAPI {
 
     public DatabaseManager getDatabaseManager() {
         return databaseManager;
+    }
+
+    private static boolean setupEconomy() {
+        if (plugin.getServer().getPluginManager().getPlugin("Vault") == null) {
+            return false;
+        }
+        RegisteredServiceProvider<Economy> rsp = plugin.getServer().getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            return false;
+        }
+        econ = rsp.getProvider();
+        return econ != null;
+    }
+
+    private static boolean setupChat() {
+        RegisteredServiceProvider<Chat> rsp = plugin.getServer().getServicesManager().getRegistration(Chat.class);
+        chat = rsp.getProvider();
+        return chat != null;
+    }
+
+    private static boolean setupPermissions() {
+        RegisteredServiceProvider<Permission> rsp = plugin.getServer().getServicesManager().getRegistration(Permission.class);
+        perms = rsp.getProvider();
+        return perms != null;
+    }
+
+    public ObjectManager getObjectManager() {
+        return objectManager;
     }
 }

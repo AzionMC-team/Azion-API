@@ -5,9 +5,8 @@ import com.mongodb.client.model.FindOneAndReplaceOptions;
 import com.mongodb.client.model.ReturnDocument;
 import fr.azion.sothis.api.database.DatabaseManager;
 import fr.azion.sothis.api.listeners.ListenerManager;
-import fr.azion.sothis.api.pojo.Grade;
 import fr.azion.sothis.api.pojo.Report;
-import fr.azion.sothis.api.pojo.User;
+import fr.azion.sothis.api.socket.Sockets;
 import org.bson.Document;
 
 import java.util.function.Consumer;
@@ -18,10 +17,12 @@ public class ReportManager {
 
     private MongoCollection<Report> reports;
     private ListenerManager listenerManager;
+    private Sockets sockets;
 
-    public ReportManager(DatabaseManager databaseManager, ListenerManager listenerManager) {
+    public ReportManager(DatabaseManager databaseManager, ListenerManager listenerManager, Sockets sockets) {
         this.reports = databaseManager.getReports();
         this.listenerManager = listenerManager;
+        this.sockets = sockets;
     }
 
     public Report getReport(String uuid) {
@@ -50,5 +51,6 @@ public class ReportManager {
     public void createReport(Report report) {
         reports.insertOne(report);
         listenerManager.deflectReportListener(report);
+        sockets.getClientInterface().sendCreationReport(report.getPlayerreport());
     }
 }

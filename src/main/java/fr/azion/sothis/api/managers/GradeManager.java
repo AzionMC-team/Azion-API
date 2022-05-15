@@ -7,7 +7,6 @@ import fr.azion.sothis.api.database.DatabaseManager;
 import fr.azion.sothis.api.pojo.Grade;
 import org.bson.Document;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 import static com.mongodb.client.model.Filters.eq;

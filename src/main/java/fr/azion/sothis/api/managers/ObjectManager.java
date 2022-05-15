@@ -4,13 +4,9 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.FindOneAndReplaceOptions;
 import com.mongodb.client.model.ReturnDocument;
 import fr.azion.sothis.api.AzionAPI;
-import fr.azion.sothis.api.database.DatabaseManager;
-import fr.azion.sothis.api.pojo.Grade;
-import fr.azion.sothis.api.pojo.User;
 import org.bson.Document;
 import org.bukkit.Bukkit;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 import static com.mongodb.client.model.Filters.eq;
