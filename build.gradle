@@ -38,7 +38,7 @@ publishing {
     repositories {
         maven {
             name = "AzionAPI"
-            url = uri("https://maven.pkg.github.com/AzionMC-team/AzionAPI")
+            url = "https://maven.pkg.github.com/AzionMC-team/AzionAPI"
             credentials {
                 username = System.getenv("USERNAME")
                 password = System.getenv("TOKEN")
