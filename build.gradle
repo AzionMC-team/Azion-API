@@ -37,7 +37,7 @@ test {
 publishing {
     repositories {
         maven {
-            name = "AzionAPI"
+            name = "fr.sothis.api"
             url = uri("https://maven.pkg.github.com/AzionMC-team/AzionAPI")
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
