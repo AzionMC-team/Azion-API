@@ -1,11 +1,9 @@
 plugins {
     id 'java'
-    id 'maven-publish'
 }
 
-group 'fr.azion'
+group 'fr.sothis'
 version '1.0-SNAPSHOT'
-compileJava.options.encoding = 'UTF-8'
 
 repositories {
     mavenCentral()
@@ -22,8 +20,8 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
     compileOnly 'org.bukkit:craftbukkit:1.8.8-R0.1-SNAPSHOT'
     compileOnly "com.github.MilkBowl:VaultAPI:1.7.1"
@@ -33,22 +31,4 @@ dependencies {
 
 test {
     useJUnitPlatform()
-}
-
-publishing {
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/AzionMC-team/Azion-API")
-            credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
-            }
-        }
-    }
-    publications {
-        myLibrary(MavenPublication) {
-            from components.java
-        }
-    }
 }
