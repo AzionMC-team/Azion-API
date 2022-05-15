@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'maven-publish'
 }
 
 group 'fr.azion'
@@ -13,8 +14,7 @@ repositories {
         content {
             includeGroup 'org.bukkit'
             includeGroup 'org.spigotmc'
-        }
-    }
+        }}
     maven { url 'https://jitpack.io' }
     maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
     maven { url = 'https://oss.sonatype.org/content/repositories/central' }
@@ -34,6 +34,16 @@ dependencies {
 test {
     useJUnitPlatform()
 }
-jar{
-    destinationDir = file("C:\\Users\\Shadow\\Download")
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/AzionMC-team/Azion-API")
+            credentials {
+                username = System.getenv("Sothis04")
+                password = System.getenv("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")
+            }
+        }
+    }
 }
