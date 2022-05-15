@@ -180,21 +180,21 @@ public class ItemBuilder {
         return this;
     }
 
-    public ItemBuilder setUnbreakable() {
-        getItemMeta().spigot().setUnbreakable(true);
+    /*public ItemBuilder setUnbreakable() {
+        getItemMeta().setUnbreakable(true);
         setItemMeta(getItemMeta());
         return this;
-    }
+    }*/
 
-    public ItemBuilder removeUnbreakable() {
+    /*public ItemBuilder removeUnbreakable() {
         getItemMeta().spigot().setUnbreakable(false);
         setItemMeta(getItemMeta());
         return this;
-    }
+    }*/
 
-    public boolean isUnbreakable() {
+    /*public boolean isUnbreakable() {
         return getItemMeta().spigot().isUnbreakable();
-    }
+    }*/
 
     public String getDisplayName() {
         return getItemMeta().getDisplayName();
