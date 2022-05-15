@@ -38,6 +38,7 @@ hs_err_pid*
 # Parce que j'en ai rien a foutre
 .idea/
 .idea/*
+!libs/*.jar
 
 # User-specific stuff:
 .idea/workspace.xml
