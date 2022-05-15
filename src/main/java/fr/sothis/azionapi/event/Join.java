@@ -1,8 +1,8 @@
-package fr.sothis.api.event;
+package fr.sothis.azionapi.event;
 
-import fr.sothis.api.database.DatabaseManager;
-import fr.sothis.api.managers.UserManager;
-import fr.sothis.api.pojo.User;
+import fr.sothis.azionapi.database.DatabaseManager;
+import fr.sothis.azionapi.managers.UserManager;
+import fr.sothis.azionapi.pojo.User;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

@@ -1,4 +1,4 @@
-package fr.sothis.api.pojo;
+package fr.sothis.azionapi.pojo;
 
 import org.bson.codecs.pojo.annotations.BsonProperty;
 

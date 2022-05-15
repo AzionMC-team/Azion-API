@@ -1,12 +1,12 @@
-package fr.sothis.api.database;
+package fr.sothis.azionapi.database;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import fr.sothis.api.pojo.Grade;
-import fr.sothis.api.pojo.Report;
-import fr.sothis.api.pojo.User;
+import fr.sothis.azionapi.pojo.Grade;
+import fr.sothis.azionapi.pojo.Report;
+import fr.sothis.azionapi.pojo.User;
 import org.bson.codecs.configuration.CodecProvider;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.Conventions;

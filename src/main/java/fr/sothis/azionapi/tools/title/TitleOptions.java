@@ -1,4 +1,4 @@
-package fr.sothis.api.tools.title;
+package fr.sothis.azionapi.tools.title;
 
 public class TitleOptions {
 

@@ -1,13 +1,9 @@
-package fr.sothis.api.socket;
+package fr.sothis.azionapi.socket;
 
-import com.google.gson.JsonObject;
-import fr.sothis.api.AzionAPI;
-import fr.sothis.api.listeners.ListenerManager;
-import fr.sothis.api.pojo.Report;
-import io.socket.client.Ack;
+import fr.sothis.azionapi.AzionAPI;
+import fr.sothis.azionapi.listeners.ListenerManager;
+import fr.sothis.azionapi.pojo.Report;
 import io.socket.client.Socket;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class ServerInterface {
 

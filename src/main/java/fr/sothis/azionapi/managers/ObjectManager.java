@@ -1,9 +1,9 @@
-package fr.sothis.api.managers;
+package fr.sothis.azionapi.managers;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.FindOneAndReplaceOptions;
 import com.mongodb.client.model.ReturnDocument;
-import fr.sothis.api.AzionAPI;
+import fr.sothis.azionapi.AzionAPI;
 import org.bson.Document;
 import org.bukkit.Bukkit;
 

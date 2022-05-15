@@ -1,4 +1,4 @@
-package fr.sothis.api.tools;
+package fr.sothis.azionapi.tools;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;

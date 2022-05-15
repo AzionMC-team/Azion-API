@@ -1,12 +1,12 @@
-package fr.sothis.api.managers;
+package fr.sothis.azionapi.managers;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.FindOneAndReplaceOptions;
 import com.mongodb.client.model.ReturnDocument;
-import fr.sothis.api.database.DatabaseManager;
-import fr.sothis.api.listeners.ListenerManager;
-import fr.sothis.api.pojo.Report;
-import fr.sothis.api.socket.Sockets;
+import fr.sothis.azionapi.database.DatabaseManager;
+import fr.sothis.azionapi.listeners.ListenerManager;
+import fr.sothis.azionapi.pojo.Report;
+import fr.sothis.azionapi.socket.Sockets;
 import org.bson.Document;
 
 import java.util.function.Consumer;

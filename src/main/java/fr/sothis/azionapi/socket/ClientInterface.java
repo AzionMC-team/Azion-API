@@ -1,11 +1,8 @@
-package fr.sothis.api.socket;
+package fr.sothis.azionapi.socket;
 
-import com.google.gson.JsonObject;
 import io.socket.client.Ack;
 import io.socket.client.Socket;
 import org.bukkit.Bukkit;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class ClientInterface {
 

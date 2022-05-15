@@ -1,4 +1,4 @@
-package fr.sothis.api.tools.title;
+package fr.sothis.azionapi.tools.title;
 
 import net.minecraft.server.v1_8_R3.IChatBaseComponent;
 import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;

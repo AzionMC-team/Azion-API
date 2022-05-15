@@ -1,10 +1,10 @@
-package fr.sothis.api.managers;
+package fr.sothis.azionapi.managers;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.FindOneAndReplaceOptions;
 import com.mongodb.client.model.ReturnDocument;
-import fr.sothis.api.database.DatabaseManager;
-import fr.sothis.api.pojo.User;
+import fr.sothis.azionapi.database.DatabaseManager;
+import fr.sothis.azionapi.pojo.User;
 import net.milkbowl.vault.economy.Economy;
 import org.bson.Document;
 import org.bukkit.Bukkit;

@@ -1,6 +1,6 @@
-package fr.sothis.api.socket;
+package fr.sothis.azionapi.socket;
 
-import fr.sothis.api.listeners.ListenerManager;
+import fr.sothis.azionapi.listeners.ListenerManager;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 
