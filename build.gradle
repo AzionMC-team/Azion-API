@@ -41,9 +41,14 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/AzionMC-team/Azion-API")
             credentials {
-                username = System.getenv("Sothis04")
-                password = System.getenv("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")
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
             }
+        }
+    }
+    publications {
+        myLibrary(MavenPublication) {
+            from components.java
         }
     }
 }
