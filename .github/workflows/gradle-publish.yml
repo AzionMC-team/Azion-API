@@ -22,6 +22,8 @@ jobs:
         distribution: 'corretto'
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
+    - name: Change Gradlew Permissions
+      run: chmod +x gradlew
     - name: Build with Gradle
       uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
       with:
